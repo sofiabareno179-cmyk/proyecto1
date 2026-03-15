@@ -1,0 +1,4 @@
+#Archivo:.gitignore
+.env
+__picache__/
+*.sqlite
