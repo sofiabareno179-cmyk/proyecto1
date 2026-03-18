@@ -7,7 +7,7 @@ load_dotenv()
 app=Flask(__name__)
 #3.[ENCAPSULAMIENTO DE CONFIGURACIÓN]:Guardamos los secretos dentro de'app'
 #Si la variable no existe en el .env, usamos un valor'fallback' por seguridad
-app.config['SQLALCHEMY DATABASE URI']=os.getenv('DATABASE_URI','sqlite:///defa')
+app.config['SQLALCHEMY DATABASE URI']=os.getenv('DATABASE_URI','sqlite:///default.sqlite')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
 app.config['JWT_SECRET_KEY']=os.getenv('JWT_SECRET_KEY','clave-insegura')
  #Agregar conectado moedels.py en app.py,debajo de las configuraciones 
