@@ -5,7 +5,7 @@ load_dotenv()
 #[instanciación]
 app=Flask(__name__)
 #[encapsulamiento de configuracion]
-app.config['SQLALCHEMY_DATABASE_URI']=os.getenv('DATABASE_URI','sqlite:///default.db')
+app.config['SQLALCHEMY_DATABASE_URI']=os.getenv('DATABASE_URI','sqlite:///default.sqlite')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
 app.config['JWT_SECRET_KEY']=os.getenv('JWT_SECRET_KEY','clave_insegura')
 from models import db
