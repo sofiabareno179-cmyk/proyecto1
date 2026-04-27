@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block titulo_pagina %}Usuario {{ user.nameUser }}{% endblock %}
+{% block content %}
+    <div class="container">
+        <table class="table table-bordered">
+            <tr>
+                <th>ID</th>
+                <td>{{ user.idUser }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ user.nameUser }}</td>
+            </tr>
+             <tr>
+                <th>email</th>
+                <td>{{ user.email }}</td>
+            </tr>
+             <tr>
+                <th>creando_en</th>
+                <td>{{ user.creando_en }}</td>
+            </tr>
+            <tr>
+                <th>Contraseña</th>
+                <td>{{ user.passwordUser }}</td>
+            </tr>
+        </table>
+        <div class="d-flex justify-content-between">
+            <a href="{{ url_for('user.edit', id=user.idUser) }}" class="btn btn-primary btn-sm mb-1">
+                <i class="bi bi-pencil-square"></i>
+            </a>
+            <a href="{{ url_for('user.delete', id=user.idUser) }}" class="btn btn-danger btn-sm mb-1">
+                <i class="bi bi-trash"></i>
+            </a>
+        </div>
+       
+    </div>
+{% endblock %}
