@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h2 class="mb-0">Editar Perfil #{{ perfil.id }}</h2>
+        </div>
+        <div class="card-body">
+            <form action="{{ url_for('perfil.edit', id=perfil.id) }}" method="post">
+                <div class="mb-3">
+                    <label for="usuario_id" class="form-label">ID de Usuario Asociado:</label>
+                    <input type="number" id="usuario_id" name="usuario_id" 
+                           class="form-control bg-light" 
+                           value="{{ perfil.usuario_id }}" readonly>
+                    <small class="text-muted">El ID del usuario no se puede cambiar desde aquí.</small>
+                </div>
+                <div class="mb-3">
+                    <label for="bio" class="form-label">Biografía:</label>
+                    <textarea id="bio" name="bio" class="form-control" 
+                              rows="4" required>{{ perfil.bio }}</textarea>
+                    <small class="text-muted">descripcion biografia del perfil</small>
+                </div>
+
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-success rounded-pill px-4">
+                        Actualizar Perfil
+                    </button>
+                    <a href="{{ url_for('perfil.index') }}" class="btn btn-secondary rounded-pill px-4">
+                        Cancelar
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
