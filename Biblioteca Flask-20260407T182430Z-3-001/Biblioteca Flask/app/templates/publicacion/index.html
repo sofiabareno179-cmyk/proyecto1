@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Lista de Publicaciones</h1>
+        <a href="{{ url_for('publicacion.add') }}" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Nueva Publicación
+        </a>
+    </div>
+
+    {# Mensajes flash para confirmaciones #}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <div class="card shadow">
+        <div class="card-body p-0">
+            <table class="table table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Título</th>
+                        <th>Contenido</th>
+                        <th>usuario_id</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="publicacionTable">
+                    {% for p in data %}
+                    <tr>
+                        <td>{{ p.id }}</td>
+                        <td><strong>{{ p.titulo }}</strong></td>
+                        <td>
+                            {# Mostramos un resumen del contenido #}
+                            {{ p.contenido[:80] }}{% if p.contenido|length > 80 %}...{% endif %}
+                        </td>
+                        <td><span class="badge bg-secondary">{{ p.usuario_id }}</span></td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a href="{{ url_for('publicacion.edit', id=p.id) }}" class="btn btn-sm btn-outline-info">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <form action="{{ url_for('publicacion.delete', id=p.id) }}" method="POST" style="display:inline;">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('¿Eliminar publicación?')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="5" class="text-center py-4 text-muted">
+                            No hay publicaciones encontradas.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
