@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block titulo_pagina %}Etiqueta {{ etiqueta.nombre }}{% endblock %}
+{% block content %}
+    <div class="container">
+        <table class="table table-bordered">
+            <tr>
+                <th>ID</th>
+                <td>{{ etiqueta.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ etiqueta.nombre }}</td>
+            </tr>
+             <tr>
+                <th>slug</th>
+                <td>{{ etiqueta.slug }}</td>
+            </tr>
+        </table>
+        <div class="d-flex justify-content-between">
+            <a href="{{ url_for('etiqueta.edit', id=etiqueta.id) }}" class="btn btn-primary btn-sm mb-1">
+                <i class="bi bi-pencil-square"></i>
+            </a>
+            <a href="{{ url_for('etiqueta.delete', id=etiqueta.id) }}" class="btn btn-danger btn-sm mb-1">
+                <i class="bi bi-trash"></i>
+            </a>
+        </div>
+       
+    </div>
+{% endblock %}
