@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block titulo_pagina %}Lista de Usuarios{% endblock %}
+{% block content %}
+    
+    <div class="text-start">
+        <a href="{{ url_for('user.add') }}" class="btn btn-primary btn-sm mb-1">
+            <i class="bi bi-person-plus"></i> Agregar usuario
+        </a>
+
+       
+    </div>
+    <input type="text" id="searchInput" class="form-control mb-3" placeholder="Buscar usuario.">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                 <th>Fecha Registro</th>
+                <th>Contraseña</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="userTable">
+            {% for user in data %}
+                <tr>
+                    <td>{{ user.idUser }}</td>
+                    <td>{{ user.nameUser }}</td>
+                    <td>{{ user.email }}</td>
+            <td>{{ user.creado_en.strftime('%Y-%m-%d') }}</td>
+                 <td class="text-truncate" style="max-width: 150px;">
+                    <small class="text-muted">{{ user.password_hash }}</small>
+                </td>
+                    <td>
+                        <a href="{{ url_for('user.detail', id=user.idUser) }}" class="btn btn-success btn-sm mb-1">
+                            <i class="bi bi-person"></i>
+                        </a>
+                        <a href="{{ url_for('user.edit', id=user.idUser) }}" class="btn btn-primary btn-sm mb-1">
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
+                        <a href="{{ url_for('user.delete', id=user.idUser) }}" class="btn btn-danger btn-sm mb-1">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        document.getElementById('searchInput').addEventListener('keyup', function() {
+            const searchValue = this.value.toLowerCase();
+            const rows = document.querySelectorAll('#userTable tr');
+            rows.forEach(row => {
+                const userName = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+                if (userName.includes(searchValue)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    </script>
+
+  </div>
+{% endblock %}
