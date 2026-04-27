@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Nueva Etiqueta</h2>
+    <hr>
+
+    <form method="POST" action="{{ url_for('etiqueta.add') }}">
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre de la Etiqueta</label>
+            <input type="text" 
+                   name="nombre" 
+                   id="nombre" 
+                   class="form-control" 
+                   placeholder="Ej: Programación" 
+                   required>
+        </div>
+
+        <div class="mb-3">
+            <label for="slug" class="form-label">Slug (URL Amigable)</label>
+            <input type="text" 
+                   name="slug" 
+                   id="slug" 
+                   class="form-control" 
+                   placeholder="Ej: programacion" 
+                   required>
+            <small class="form-text text-muted">Suele ser el nombre en minúsculas y sin espacios.</small>
+        </div>
+
+        <div class="mt-4">
+            <button type="submit" class="btn btn-primary">Guardar Etiqueta</button>
+            <a href="{{ url_for('etiqueta.index') }}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
