@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+            <div class="card-header"><h4>Nueva Publicación</h4></div>
+            <div class="card-body">
+                <form action="{{ url_for('publicacion.add') }}" method="POST">
+                    <div class="mb-3">
+                        <label class="form-label">Título</label>
+                        <input type="text" name="titulo" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Contenido</label>
+                        <textarea name="contenido" class="form-control" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Guardar Publicación</button>
+                    <a href="{{ url_for('publicacion.index') }}" class="btn btn-secondary">Volver</a>
+                </form>
+            </div>
+        </div>
+{% endblock %}
